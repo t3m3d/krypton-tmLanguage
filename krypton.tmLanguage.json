@@ -42,14 +42,42 @@
               "match": "\\\\[nrt\\\\\"']"
             }
           ]
+        },
+        {
+          "name": "string.interpolated.krypton",
+          "begin": "`",
+          "end": "`",
+          "patterns": [
+            {
+              "name": "constant.character.escape.krypton",
+              "match": "\\\\[nrt\\\\`']"
+            },
+            {
+              "name": "meta.embedded.expression.krypton",
+              "begin": "\\{",
+              "end": "\\}",
+              "patterns": [
+                { "include": "#keywords" },
+                { "include": "#builtins" },
+                { "include": "#numbers" },
+                { "include": "#strings" },
+                { "include": "#operators" },
+                { "include": "#identifiers" }
+              ]
+            }
+          ]
         }
       ]
     },
     "numbers": {
       "patterns": [
         {
+          "name": "constant.numeric.hex.krypton",
+          "match": "\\b0[xX][0-9a-fA-F]+\\b"
+        },
+        {
           "name": "constant.numeric.integer.krypton",
-          "match": "\\b[0-9]+\\b"
+          "match": "\\b-?[0-9]+\\b"
         }
       ]
     },
@@ -57,11 +85,11 @@
       "patterns": [
         {
           "name": "keyword.control.krypton",
-          "match": "\\b(if|else|while|break|emit|return)\\b"
+          "match": "\\b(if|else|while|for|in|do|loop|until|break|continue|match|emit|return|try|catch|throw)\\b"
         },
         {
           "name": "keyword.declaration.krypton",
-          "match": "\\b(func|fn|let|module)\\b"
+          "match": "\\b(func|fn|let|const|module|import|export|struct|class|type|callback|jxt)\\b"
         },
         {
           "name": "keyword.other.entry.krypton",
@@ -74,6 +102,10 @@
         {
           "name": "constant.language.boolean.krypton",
           "match": "\\b(true|false)\\b"
+        },
+        {
+          "name": "constant.language.null.krypton",
+          "match": "\\b(null)\\b"
         }
       ]
     },
@@ -81,14 +113,14 @@
       "patterns": [
         {
           "name": "support.function.krypton",
-          "match": "\\b(print|len|substring|toInt|split|startsWith|readFile|arg|argCount|getLine|lineCount|count|envNew|envSet|envGet|makeResult|getResultVal|getResultPos|getResultFlag|isTruthy|sbNew|sbAppend|sbToString|tokenize|isDigit|isAlpha|isAlphaNum)\\b"
+          "match": "\\b(kp|print|printErr|len|length|count|substring|toInt|toStr|parseInt|split|range|startsWith|endsWith|contains|indexOf|replace|trim|toUpper|toLower|reverse|repeat|pow|abs|charCode|fromCharCode|isDigit|isAlpha|isAlphaNum|isTruthy|readFile|writeFile|arg|argCount|getLine|lineCount|exit|tokenize|tokAt|tokVal|tokType|sbNew|sbAppend|sbToString|envNew|envSet|envGet|structNew|setField|getField|hasField|structFields|pairVal|pairPos|pairNew|makeResult|getResultVal|getResultPos|getResultFlag)\\b"
         }
       ]
     },
     "function-definition": {
       "patterns": [
         {
-          "match": "\\b(func|fn)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+          "match": "\\b(func|fn|callback)\\s+([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
           "captures": {
             "1": { "name": "keyword.declaration.krypton" },
             "2": { "name": "entity.name.function.krypton" }
@@ -128,6 +160,14 @@
           "match": "&&|\\|\\||!"
         },
         {
+          "name": "keyword.operator.assignment.compound.krypton",
+          "match": "\\+=|-=|\\*=|/=|%="
+        },
+        {
+          "name": "keyword.operator.increment.krypton",
+          "match": "\\+\\+|--"
+        },
+        {
           "name": "keyword.operator.arithmetic.krypton",
           "match": "\\+|-|\\*|/|%"
         },
@@ -138,6 +178,10 @@
         {
           "name": "keyword.operator.arrow.krypton",
           "match": "->"
+        },
+        {
+          "name": "keyword.operator.access.krypton",
+          "match": "\\."
         }
       ]
     },
