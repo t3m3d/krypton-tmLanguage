@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Krypton",
   "scopeName": "source.krypton",
-  "fileTypes": ["k", "ks"],
+  "fileTypes": ["k", "ks", "htk"],
   "patterns": [
     { "include": "#comments" },
     { "include": "#strings" },
